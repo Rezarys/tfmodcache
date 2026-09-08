@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tfmodcache"
+version = "0.1.0"
+description = "A local, shared module cache for Terraform and OpenTofu."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Younes Z." }]
+keywords = ["terraform", "opentofu", "modules", "cache"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: System :: Systems Administration",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Rezarys/tfmodcache"
+Source = "https://github.com/Rezarys/tfmodcache"
+Changelog = "https://github.com/Rezarys/tfmodcache/blob/main/CHANGELOG.md"
+
+[project.scripts]
+tfmodcache = "tfmodcache.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
