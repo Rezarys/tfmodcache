@@ -78,4 +78,4 @@ Python 3.9 or newer, no third party dependencies. `git` on `PATH` is needed for 
 
 ## Licence
 
-MIT. Written by Younes Z.
+MIT. Written by Younes Z., built with AI assistance, reviewed and tested by me.
