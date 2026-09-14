@@ -66,7 +66,9 @@ Anything left alone is downloaded by Terraform exactly as before. The worst case
 
 ## Limits
 
-The module layout and the manifest this tool writes follow the format Terraform documents. The module registry protocol has been checked against a real registry. Running `terraform init` itself against the manifest this tool produces has not been verified end to end yet. If the manifest is ever wrong, Terraform falls back to downloading the module itself, so the worst case stays the behaviour you had before installing this tool.
+The module layout and the manifest this tool writes follow the format Terraform documents, and they were verified against Terraform v1.11.3 on 2026-09-14: two projects sharing one cache, a registry module downloaded once and reused by the second project, `terraform init` accepting the manifest as written and downloading nothing again, and `terraform validate` reporting a valid configuration. The end to end tests that cover this live in `tests/test_live_terraform.py` and run against whichever binary is on your `PATH`.
+
+Not verified end to end: OpenTofu, and private registries. If the manifest is ever wrong, Terraform falls back to downloading the module itself, so the worst case stays the behaviour you had before installing this tool.
 
 ## Where things live
 

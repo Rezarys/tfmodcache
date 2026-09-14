@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1, not released yet
+
+- Fix: a git source written the way Terraform documents it, `git::URL//subdir?ref=v1`, lost its `ref` and looked for a subdirectory named after the whole query. Both orders of `//subdir` and `?ref=` now parse the same way.
+- End to end tests against a real Terraform binary: a git module taken from a subdirectory, and a second project laid out with the network forbidden, both passing. A third test covers a registry module shared by two projects; it needs network access to run and has only been checked by hand so far.
+
 ## 0.1.0
 
 First release.
