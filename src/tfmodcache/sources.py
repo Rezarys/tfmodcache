@@ -57,7 +57,13 @@ def split_subdir(source: str) -> tuple:
     index = source.find("//", search_from)
     if index == -1:
         return source, ""
-    return source[:index], source[index + 2 :].strip("/")
+    base, subdir = source[:index], source[index + 2 :].strip("/")
+    # Terraform documents ``git::URL//subdir?ref=v1``, so the query sits after the
+    # subdirectory as often as before it. Put it back where the url parsing expects it.
+    if "?" in subdir:
+        subdir, query = subdir.split("?", 1)
+        base = base + "?" + query
+    return base, subdir.strip("/")
 
 
 def classify(source: str) -> Source:

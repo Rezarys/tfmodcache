@@ -30,6 +30,28 @@ def test_git_source_with_ref_and_subdirectory():
     assert found.subdir == "modules/db"
 
 
+def test_git_source_with_the_ref_after_the_subdirectory():
+    """The order Terraform's own documentation uses, and the common one in the wild."""
+    found = sources.classify("git::https://example.com/org/repo.git//modules/db?ref=v1.2.3")
+    assert found.kind == sources.GIT
+    assert found.url == "https://example.com/org/repo.git"
+    assert found.ref == "v1.2.3"
+    assert found.subdir == "modules/db"
+
+
+def test_other_query_parameters_survive_a_subdirectory():
+    found = sources.classify("git::https://example.com/repo.git//modules/db?depth=1&ref=main")
+    assert found.url == "https://example.com/repo.git?depth=1"
+    assert found.ref == "main"
+    assert found.subdir == "modules/db"
+
+
+def test_registry_source_with_a_subdirectory_keeps_no_query():
+    found = sources.classify("ns/mod/aws//submodule")
+    assert found.kind == sources.REGISTRY
+    assert found.subdir == "submodule"
+
+
 def test_github_shorthand_becomes_a_git_url():
     found = sources.classify("github.com/org/repo")
     assert found.kind == sources.GIT
